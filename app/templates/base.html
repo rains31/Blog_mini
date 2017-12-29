@@ -136,15 +136,8 @@
     </div>
 {% endblock %}
 <div class="footer">
-    <p class="footer-content">
-        @2016
-        <a href="#">Blog_mini</a>
-        -开源博客系统
-        {% if not current_user.is_authenticated %}
-            -<a href="{{ url_for('auth.login') }}">
-            <span class="glyphicon glyphicon-wrench">后台管理</span>
-        </a>
-        {% endif %}
+    <p class="text-center text-muted">
+    本站系统基于 <a href="https://github.com/xpleaf/Blog_mini">Blog_mini</a> 构建，感谢原作者 <a href="http://blog.51cto.com/xpleaf">xpleaf</a>
     </p>
 </div>
 <div class="btn-group-vertical floatButton">
