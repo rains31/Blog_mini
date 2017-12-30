@@ -17,7 +17,7 @@
 <body>
 <header>
     <div class='header-top'>
-        <div class="container">
+        <div class="container-fluid">
             <h2  class="blog-title"><a href="{{ url_for('main.index') }}">{{ BlogInfo.query.first().title }}</a></h2>
             <p class="lead signature">
                 {{ BlogInfo.query.first().signature }}
@@ -25,7 +25,7 @@
         </div>
     </div>
     <nav class="navbar navbar-{{ BlogInfo.query.first().navbar }}" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">切换导航</span>
@@ -90,9 +90,9 @@
 </header>
 {% block Content %}
     <div class="content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8 article">
+                <div class="col-lg-9 article">
                     {% for category, message in get_flashed_messages(with_categories=true) %}
                         <div class="alert alert-{{ category }} alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -102,7 +102,7 @@
                     {% block content %}
                     {% endblock %}
                 </div>
-                <div class="col-md-4 blog_nav">
+                <div class="col-lg-3 blog_nav">
                     {% block blog_nav_plugin %}
                         {% for plugin in Plugin.query.order_by(Plugin.order.asc()).all() %}
                             {% if plugin.disabled != True %}

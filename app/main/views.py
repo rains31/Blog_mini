@@ -1,12 +1,14 @@
 #coding:utf-8
 from flask import render_template, request, current_app, redirect,\
-    url_for, flash
+    url_for, flash, Response, abort
 from . import main
 from ..models import Article, ArticleType, article_types, Comment, \
     Follow, User, Source, BlogView
 from .forms import CommentForm
 from .. import db
-
+from urlparse import urlsplit, urlunsplit
+from flask_cache import Cache
+import requests
 
 @main.route('/')
 def index():
@@ -19,6 +21,19 @@ def index():
     return render_template('index.html', articles=articles,
                            pagination=pagination, endpoint='.index')
 
+
+@main.route('/avatar/<string:path>')
+def get_avatar(path):
+    if 'rains.im/' not in str(request.referrer):
+        return abort(404)
+    scheme, host, path, query, fragment = urlsplit(request.url)
+    url = urlunsplit(('http', 'secure.gravatar.com', path, query, fragment))
+    cache = Cache(current_app)
+    @cache.memoize(86400)
+    def _get_avatar(url):
+        ret = requests.get(url)
+        return ret.content
+    return Response(_get_avatar(url), mimetype='image/png')
 
 @main.route('/article-types/<int:id>/')
 def articleTypes(id):

@@ -4,6 +4,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config():
     # DEBUG = True
+    CACHE_TYPE = 'redis'
+    CACHE_REDIS_HOST = '127.0.0.1'
+    CACHE_REDIS_PORT = 6379
+    CACHE_REDIS_DB = None
+    CACHE_REDIS_PASSWORD = None
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     # SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_RECORD_QUERIES = True
